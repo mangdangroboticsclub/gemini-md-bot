@@ -29,6 +29,16 @@ import time
 import threading
 import copy
 
+# OpenClaw integration
+try:
+    from api.openclaw import OpenClaw
+except ImportError:
+    import sys, os
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    from openclaw import OpenClaw
+
+openclaw = OpenClaw()
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from api.UDPComms import Publisher
 
@@ -78,6 +88,27 @@ def send_msgs(msgs):
 
     thread = threading.Thread(target=send_updates)
     thread.start()
+
+###############################
+# OpenClaw control functions  #
+###############################
+def open_claw():
+    """
+    Open the OpenClaw gripper.
+    """
+    openclaw.open()
+
+def close_claw():
+    """
+    Close the OpenClaw gripper.
+    """
+    openclaw.close()
+
+def test_openclaw_integration():
+    """
+    Test OpenClaw integration by opening and closing the claw.
+    """
+    openclaw.test()
 
 # Active pupyy, fake "L1" button
 def init_movement():
@@ -505,6 +536,9 @@ async def main(args):
         "look upper right": look_upperright,
         "look lower right": look_rightlower,
         "dance": dance,
+        "openclaw": open_claw,
+        "closeclaw": close_claw,
+        "test_openclaw": test_openclaw_integration,
     }
     async_move_api_map = {
         #"trot": trot,
