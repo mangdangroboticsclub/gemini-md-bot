@@ -141,3 +141,71 @@ If you want to test the camera module, run the following command.
 ```
 ffmpeg -i /dev/video0 -vf 'scale=320:240' -vframes 1 -an -b:v 500k output.jpg
 ```
+
+## Install OpenClaw
+
+OpenClaw is an AI assistant that can run on MiniPupper, providing voice control and intelligent interactions.
+
+### Prerequisites
+
+First update the system and install the required software packages:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl build-essential
+```
+
+### Install Node.js 22 (ARM64)
+
+OpenClaw requires Node.js 22 for ARM64 architecture:
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# Verify installation
+node --version  # Should show v22.x.x
+npm --version
+```
+
+### Add Swap Memory
+
+For optimal performance on low RAM devices, add swap memory:
+
+```bash
+# Create 2GB swap file
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
+# Make permanent
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
+# Optimize for low RAM (reduce swappiness)
+echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+```
+
+### Install OpenClaw
+
+Use the official installer to install OpenClaw:
+
+```bash
+curl -fsSL https://openclaw.ai/install.sh | bash
+```
+
+### Setup and Configuration
+
+Run the onboarding wizard to configure OpenClaw:
+
+```bash
+openclaw onboard --install-daemon
+```
+
+Follow the setup wizard to:
+- Configure your preferred AI model (such as GitHub Copilot)
+- Set up communication channels (WhatsApp, Discord, etc.)
+- Customize voice commands and responses
+
+After setup is complete, you can start using OpenClaw with your MiniPupper for voice-controlled interactions and AI assistance.
