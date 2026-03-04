@@ -468,6 +468,13 @@ def dance(duration=2):
     send_msgs(msgs)
 
 
+def openclaw():
+    """
+    Launch OpenClaw onboarding flow.
+    """
+    os.system("openclaw onboard --install-daemon")
+
+
 import argparse
 async def main(args):
     # Setup logging
@@ -505,6 +512,7 @@ async def main(args):
         "look upper right": look_upperright,
         "look lower right": look_rightlower,
         "dance": dance,
+        "openclaw": openclaw,
     }
     async_move_api_map = {
         #"trot": trot,
