@@ -80,7 +80,7 @@ def create_conversation():
     - conversation (ConversationChain): The conversation object initialized with the AI model and prompt template.
     """
     model = ChatVertexAI(
-        model_name='gemini-2.0-flash',
+        model_name='gemini-2.5-flash',
         convert_system_message_to_human=True,
     )
 
@@ -382,7 +382,7 @@ def main():
     speech_client = init_speech_to_text()
     tts_client, voice, audio_config = init_text_to_speech()
     conversation = create_conversation()
-    multi_model = ChatVertexAI(model="gemini-2.0-flash")
+    multi_model = ChatVertexAI(model="gemini-2.5-flash")
 
     while True:
         user_input = input("Enter function apis -- 'text'/'image'/'stt'/'tts' or 'exit' to quit: ").strip().lower()
