@@ -102,6 +102,7 @@ move_cmd_functions = {
                  "look upper right": move_api.look_upperright,
                  "look lower right": move_api.look_rightlower,
                  "dance": move_api.dance,
+                 "openclaw": move_api.openclaw,
              }
 
 def classify_intent_with_gemini(user_input, conversation):
@@ -138,6 +139,7 @@ HEAD MOVEMENT INTENTS:
 SOCIAL INTENTS:
 - "dance" - dance, party, celebrate, boogie, dancing, let's dance
 - "photo" - take photo, picture, camera, smile, photograph, pic
+- "openclaw" - openclaw, open claw
 
 GAME INTENTS:
 - "game_rps" - rock paper scissors, game, play, じゃんけん, let's play
@@ -188,6 +190,7 @@ INTENT_CONFIG = [
     ("head_left", "look left", "OK, my friend, look left immediately."),
     ("head_right", "look right", "OK, my friend, look right immediately."),
     ("dance", "dance", "OK, let's dance."), 
+    ("openclaw", "openclaw", "Opening OpenClaw now."),
     # Just add this one line for new command!
 ]
 
